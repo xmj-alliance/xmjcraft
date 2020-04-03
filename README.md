@@ -23,33 +23,79 @@ First make a MongoDB up and running.
 
 Then follow [example.yaml](./server/src/configs/example.yaml) and create your own config files.
 
-Next, you may deploy the server by using Kubernetes or manually running Docker.
+You may deploy the server by using Kubernetes or manually running Docker.
 
-## Kubernetes
+### Kubernetes
 
 Example kubernetes config files are provided at `k8s` folder. Change if necessary.
 
+  - Setup MongoDB
+
+  ``` shell
+
+  # Load the mongodb config into a config map
+  kubectl create configmap mongodb --from-file=/path/to/mongod.conf
+
+  # Start MongoDB
+  kubectl create -f k8s/mongo.sts.yaml --save-config
+
+  # Unfortunately right now you have to manually create the admin user,
+  # because MONGO_INITDB_ROOT_USERNAME and MONGO_INITDB_ROOT_PASSWORD does not work.
+
+  # Go into the mongo shell
+  kubectl exec -it mongo-0 -- mongo
+
+  # In mongo shell, create an admin.
+  > use admin
+  > db.createUser({ user: 'root', pwd: 'some-initial-password', roles: [ { role: "root", db: "admin" } ] });
+  > exit
+
+  # Then switch security.authorization to "enabled" in your config map.
+  kubectl edit configmap mongodb # and change the line and save the file
+
+  ## Create MongoDB Service
+  kubectl create -f k8s/mongo.svc.yaml --save-config
+
+  ```
+  - Deploy server
+
+  ``` shell
+
+  # Load the main config into a config map
+  kubectl create configmap xmjcraft-main --from-file=/path/to/main.yaml
+
+  # Load the DB config (username + password) into a secret
+  kubectl create secret generic xmjcraft-db --from-file=/path/to/secrets.yaml
+
+  # Create a deployment
+  kubectl create -f k8s/xmjcraft.deploy.yaml --record --save-config
+
+  # Create a service
+  kubectl create -f k8s/xmjcraft.svc.yaml --save-config
+
+  # Expose the service by executing on master node:
+  kubectl port-forward svc/xmjcraft 13000:3000 --address 0.0.0.0
+
+  ```
+
+  - Visit port 13000 of your master node and it will work.
+
+### Docker
+
+- Setup MongoDB
+
 ``` shell
-# Load the main config into a config map
-kubectl create configmap xmjcraft-main --from-file=/path/to/main.yaml
 
-# Load the DB config (username + password) into a secret
-kubectl create secret generic xmjcraft-db --from-file=/path/to/secrets.yaml
-
-# Create a deployment
-kubectl create -f k8s/xmjcraft.deploy.yaml --record --save-config
-
-# Create a service
-kubectl create -f k8s/xmjcraft.svc.yaml --save-config
-
-# Expose the service by executing on master node:
-kubectl port-forward svc/xmjcraft 13000:3000 --address 0.0.0.0
+docker run --name mongo-c1 -d \
+--network my-vps-main-network \
+-e MONGO_INITDB_ROOT_USERNAME=[mongoAdminName e.g. root] \
+-e MONGO_INITDB_ROOT_PASSWORD=[some-initial-password] \
+-v /workspace/www/mongo/mongod.conf:/etc/mongod.conf -v /workspace/downloadCenter:/workspace/downloadCenter \
+mongo -f /etc/mongod.conf
 
 ```
 
-Visit port 3000 of your master node and it will work.
-
-### Docker
+- Deploy Server
 
 Put the config files in `configs` folder. After that, run:
 
