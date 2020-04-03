@@ -1,0 +1,4 @@
+./**
+!./server/
+server/dist/configs/**
+server/node_modules
