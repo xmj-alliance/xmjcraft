@@ -37,10 +37,10 @@ kubectl create configmap xmjcraft-main --from-file=/path/to/main.yaml
 kubectl create secret generic xmjcraft-db --from-file=/path/to/secrets.yaml
 
 # Create a deployment
-kubectl create -f k8s/xmjcraft.deploy.yaml
+kubectl create -f k8s/xmjcraft.deploy.yaml --record --save-config
 
 # Create a service
-kubectl create -f k8s/xmjcraft.svc.yaml
+kubectl create -f k8s/xmjcraft.svc.yaml --save-config
 
 # Expose the service by executing on master node:
 kubectl port-forward svc/xmjcraft 13000:3000 --address 0.0.0.0
