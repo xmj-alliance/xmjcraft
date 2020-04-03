@@ -1,0 +1,44 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xmjcraft
+  labels:
+    app: xmjcraft
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: xmjcraft
+  template:
+    metadata:
+      labels:
+        app: xmjcraft
+    spec:
+      containers:
+        - name: xmjcraft
+          image: valorad/xmjcraft:v0.1.0
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: site-config
+              mountPath: /www/xmjcraft/configs/main.yaml
+              subPath: main.yaml
+            - name: site-secret
+              mountPath: "/www/xmjcraft/configs/secret.yaml"
+              subPath: secret.yaml
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /api
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 60
+      volumes:
+        - name: site-config
+          configMap:
+            name: xmjcraft
+        - name: site-secret
+          secret:
+            secretName: xmjcraft

@@ -19,9 +19,39 @@ Server:
 
 ## Deployment
 
-Follow the [example.yaml](./server/src/configs/example.yaml), and create the config files, then put them in the `configs` folder. After that, 
+First make a MongoDB up and running. 
+
+Then follow [example.yaml](./server/src/configs/example.yaml) and create your own config files.
+
+Next, you may deploy the server by using Kubernetes or manually running Docker.
+
+## Kubernetes
+
+Example kubernetes config files are provided at `k8s` folder. Change if necessary.
+
+``` shell
+# Load the main config into a config map
+kubectl create configmap xmjcraft-main --from-file=/path/to/main.yaml
+
+# Load the DB config (username + password) into a secret
+kubectl create secret generic xmjcraft-db --from-file=/path/to/secrets.yaml
+
+# Create a deployment
+kubectl create -f k8s/xmjcraft.deploy.yaml
+
+# Create a service
+kubectl create -f k8s/xmjcraft.svc.yaml
+
+# Expose the service by executing on master node:
+kubectl port-forward svc/xmjcraft 13000:3000 --address 0.0.0.0
+
+```
+
+Visit port 3000 of your master node and it will work.
 
 ### Docker
+
+Put the config files in `configs` folder. After that, run:
 
 ``` shell
 docker run -d \
