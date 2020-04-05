@@ -1,3 +1,6 @@
 [submodule "server"]
 	path = server
 	url = ../xmjcraft-server
+[submodule "client"]
+	path = client
+	url = ../xmjcraft-client-react
