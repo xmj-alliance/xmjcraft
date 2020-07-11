@@ -12,6 +12,8 @@ jobs:
           git submodule update --init
       - node/install-packages:
           app-dir: ./server
+          pkg-manager: yarn
+          override-ci-command: yarn install
 
 workflows:
     build-only:
