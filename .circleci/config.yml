@@ -7,14 +7,11 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - init-submodules:
+      - node/with-cache:
           steps:
             - run: >-
                 git submodule sync && 
                 git submodule update --init
-
-      - node/with-cache:
-          steps:
             - run: >-
                 cd server &&
                 npm install &&
