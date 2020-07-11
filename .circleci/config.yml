@@ -9,16 +9,16 @@ jobs:
       - checkout
       - init-submodules:
           steps:
-          - run: >-
-            git submodule sync && 
-            git submodule update --init
+            - run: >-
+                git submodule sync && 
+                git submodule update --init
 
       - node/with-cache:
           steps:
             - run: >-
-            cd server &&
-            npm install &&
-            echo "yeah"
+                cd server &&
+                npm install &&
+                echo "yeah"
 workflows:
     build-only:
       jobs:
