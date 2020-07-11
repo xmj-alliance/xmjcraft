@@ -7,15 +7,12 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: >-
-                git submodule sync && 
-                git submodule update --init
-            - run: >-
-                cd server &&
-                npm install &&
-                echo "yeah"
+      - run: >-
+          git submodule sync && 
+          git submodule update --init
+      - node/install-packages:
+          app-dir: ./server
+
 workflows:
     build-only:
       jobs:
