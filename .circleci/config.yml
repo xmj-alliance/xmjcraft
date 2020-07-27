@@ -15,6 +15,13 @@ jobs:
           app-dir: ./server
           pkg-manager: yarn
           override-ci-command: yarn install
+      - run: |
+          cd server
+          yarn run build:prod
+      # - persist_to_workspace
+      #   root: ~
+      #   paths:
+      #     - project
       # - docker/build:
       #     image: valorad/xmjcraft
       # - docker/push:
@@ -29,6 +36,11 @@ workflows:
       jobs:
         - buildNodeApp
         - docker/publish:
+            requires:
+              - buildNodeApp
             context: context0
+            # steps: 
+            #   - attach_workspace
+            #     at: ~/project
             image: valorad/xmjcraft
             update-description: true
