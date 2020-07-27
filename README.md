@@ -4,6 +4,8 @@
 [![Image version](https://images.microbadger.com/badges/version/valorad/xmjcraft.svg)](https://microbadger.com/images/valorad/xmjcraft "xmjcraft Version")
 [![Image Info](https://images.microbadger.com/badges/image/valorad/xmjcraft.svg)](https://microbadger.com/images/valorad/xmjcraft "xmjcraft Image")
 
+[![CircleCI](https://circleci.com/gh/xmj-alliance/xmjcraft.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+
 xmjCraft is a micro world for XiaoMaJias.
 
 However, it can also be a good template to boost up other new projects. Why? Because it's so tiny (or a big hello world), with very simple data model, which is very easy to understand. Moreover, it implements the state-of-the-art design patterns, as recent as possible, including much good practice of coding (maybe biased but whatever).

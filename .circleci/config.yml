@@ -1,75 +1,10 @@
 version: 2.1
 orbs:
-  # node: circleci/node@3.0.1
   docker: circleci/docker@1.3.0
-# jobs:
-  # buildNodeApp:
-  #   executor:
-  #     name: "node/default"
-  #   steps:
-  #     - checkout
-  #     - run: >-
-  #         git submodule sync && 
-  #         git submodule update --init
-  #     - node/install-packages:
-  #         app-dir: ./server
-  #         pkg-manager: yarn
-  #         override-ci-command: yarn install
-  #     - run:
-  #         command: |
-  #           cd server
-  #           yarn run build:prod
-      # - run:
-      #     command: |
-      #       cp server/dist/* /tmp/builtApp
-      #       cp server/package.dist.json /tmp/builtApp
-      # - persist_to_workspace
-      #   root: /tmp
-      #   paths:
-      #     - builtApp
-  # buildDockerImage:
-  #   executor:
-  #     docker/docker
-  #   steps:
-  #     - setup_remote_docker
-  #     - docker/check
-  #     - docker/build:
-  #       image: valorad/xmjcraft
-  #     - docker/push:
-  #       digest-path: /tmp/digest.txt
-  #       image: valorad/xmjcraft
-  #     - run:
-  #         command: |
-  #           echo "Digest is: $(</tmp/digest.txt)"
-      # - persist_to_workspace
-      #   root: ~
-      #   paths:
-      #     - project
-      # - docker/build:
-      #     image: valorad/xmjcraft
-      # - docker/push:
-      #     digest-path: /tmp/digest.txt
-      #     image: valorad/xmjcraft
-      #     tag: latest,v0.2.0
-      # - run:
-      #     command: |
-      #       echo "Digest is: $(</tmp/digest.txt)"
-  # fetchSubmodules:
-  #   executor:
-  #     docker/docker
-  #   steps:
-  #     - checkout
-  #     - run: |
-  #         git submodule sync
-  #         git submodule update --init
-
 workflows:
     mainPipe:
       jobs:
-        # - fetchSubmodules
         - docker/publish:
-            # requires:
-            #   - fetchSubmodules
             context: context0
             after_checkout:
               - run:
@@ -77,9 +12,6 @@ workflows:
                   command: |
                     git submodule sync
                     git submodule update --init
-            # steps: 
-            #   - attach_workspace
-            #     at: ~/project
             dockerfile: dockerfile
             image: valorad/xmjcraft
             update-description: false
