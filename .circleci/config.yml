@@ -15,10 +15,6 @@ jobs:
           app-dir: ./server
           pkg-manager: yarn
           override-ci-command: yarn install
-  docker/publish:
-    image: valorad/xmjcraft
-    update-description: true
-      
       # - docker/build:
       #     image: valorad/xmjcraft
       # - docker/push:
@@ -34,3 +30,5 @@ workflows:
         - buildNodeApp
         - docker/publish:
             context: context0
+            image: valorad/xmjcraft
+            update-description: true
