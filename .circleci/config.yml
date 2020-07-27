@@ -65,5 +65,6 @@ workflows:
             # steps: 
             #   - attach_workspace
             #     at: ~/project
+            dockerfile: dockerfile
             image: valorad/xmjcraft
             update-description: true
