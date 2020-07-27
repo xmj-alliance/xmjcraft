@@ -82,4 +82,4 @@ workflows:
             #     at: ~/project
             dockerfile: dockerfile
             image: valorad/xmjcraft
-            update-description: true
+            update-description: false
