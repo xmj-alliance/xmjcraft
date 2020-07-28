@@ -7,9 +7,6 @@ workflows:
     mainPipe:
       jobs:
         - docker/publish:
-            filters:
-              branches:
-                only: master
             context: context0
             after_checkout:
               - run:
