@@ -4,7 +4,7 @@
 [![Image version](https://images.microbadger.com/badges/version/valorad/xmjcraft.svg)](https://microbadger.com/images/valorad/xmjcraft "xmjcraft Version")
 [![Image Info](https://images.microbadger.com/badges/image/valorad/xmjcraft.svg)](https://microbadger.com/images/valorad/xmjcraft "xmjcraft Image")
 
-[![CircleCI](https://circleci.com/gh/xmj-alliance/xmjcraft.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+[![CircleCI](https://circleci.com/gh/xmj-alliance/xmjcraft/tree/circleci-project-setup.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 
 xmjCraft is a micro world for XiaoMaJias.
 
