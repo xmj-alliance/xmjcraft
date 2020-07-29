@@ -4,17 +4,17 @@
 [![Image version](https://images.microbadger.com/badges/version/valorad/xmjcraft.svg)](https://microbadger.com/images/valorad/xmjcraft "xmjcraft Version")
 [![Image Info](https://images.microbadger.com/badges/image/valorad/xmjcraft.svg)](https://microbadger.com/images/valorad/xmjcraft "xmjcraft Image")
 
-[![CircleCI](https://circleci.com/gh/xmj-alliance/xmjcraft/tree/circleci-project-setup.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+[![CircleCI](https://circleci.com/gh/xmj-alliance/xmjcraft/tree/circleci-project-setup.svg?style=svg)](https://circleci.com/gh/xmj-alliance/xmjcraft)
 
 xmjCraft is a micro world for XiaoMaJias.
 
 However, it can also be a good template to boost up other new projects. Why? Because it's so tiny (or a big hello world), with very simple data model, which is very easy to understand. Moreover, it implements the state-of-the-art design patterns, as recent as possible, including much good practice of coding (maybe biased but whatever).
 
-For ex:
+For e.g.:
 
 Server:
 - Centralized config management
-- Service dependency injection
+- Service dependency injection (wip)
 - Data query generalization
 - Pure GraphQL implementation
 - etc.
@@ -109,5 +109,10 @@ docker run -d \
 valorad/xmjcraft
 ```
 
-## Development
-[Server Development](./server/README.md##Development)
+## Link to Submodules
+
+[Node Server](https://github.com/xmj-alliance/xmjcraft-server)
+
+[React Client](https://github.com/xmj-alliance/xmjcraft-client-react)
+
+[Angular Client](https://github.com/xmj-alliance/xmjcraft-client-angular)
