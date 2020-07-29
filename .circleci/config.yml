@@ -17,6 +17,22 @@ workflows:
                   command: |
                     git submodule sync
                     git submodule update --init
+            dockerfile: core.dockerfile
+            image: valorad/xmjcraft
+            update-description: false
+            tag: core-$CIRCLE_SHA1
+        - docker/publish:
+            filters:
+              branches:
+                only: circleci-project-setup
+            context: context0
+            after_checkout:
+              - run:
+                  name: Fetch Submodules
+                  command: |
+                    git submodule sync
+                    git submodule update --init
             dockerfile: dockerfile
             image: valorad/xmjcraft
             update-description: false
+            tag: $CIRCLE_SHA1
